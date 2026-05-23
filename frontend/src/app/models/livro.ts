@@ -4,9 +4,6 @@ export interface Livro {
   autor: string;
   isbn: string;
   ano: number;
-  status: 'DISPONIVEL' | 'EMPRESTADO';
-  categoria: {
-    id: number;
-    nome: string;
-  };
+  status: string;
+  categoriaId: number;
 }

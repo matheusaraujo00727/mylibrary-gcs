@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { LivroService } from '../../../services/livro.service';
 import { Router } from '@angular/router';
+
+import { LivroService } from '../../../services/livro.service';
 import { CategoriaService } from '../../../services/categoria.service';
+import { Categoria } from '../../../models/categoria';
+
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-livro-form',
@@ -14,7 +17,7 @@ import { CategoriaService } from '../../../services/categoria.service';
 export class LivroFormComponent implements OnInit {
 
   form: FormGroup;
-  categorias: any[] = [];
+  categorias: Categoria[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -27,7 +30,8 @@ export class LivroFormComponent implements OnInit {
       autor: [''],
       isbn: [''],
       ano: [''],
-      categoriaId: ['']
+      categoriaId: [''],
+      status: ['DISPONIVEL']
     });
   }
 
@@ -35,13 +39,13 @@ export class LivroFormComponent implements OnInit {
     this.carregarCategorias();
   }
 
-  carregarCategorias() {
-    this.categoriaService.listar().subscribe(data => {
+  carregarCategorias(): void {
+    this.categoriaService.listar().subscribe((data: Categoria[]) => {
       this.categorias = data;
     });
   }
 
-  salvar() {
+  salvar(): void {
     this.livroService.salvar(this.form.value).subscribe(() => {
       this.router.navigate(['/livros']);
     });

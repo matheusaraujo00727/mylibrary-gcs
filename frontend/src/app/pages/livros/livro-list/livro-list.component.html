@@ -6,7 +6,7 @@
   />
 
   <select [(ngModel)]="filtros.status">
-    <option value="">Todos status</option>
+    <option value="">Todos</option>
     <option value="DISPONIVEL">Disponível</option>
     <option value="EMPRESTADO">Emprestado</option>
   </select>
@@ -20,6 +20,21 @@
 
   <button (click)="aplicarFiltro()">Filtrar</button>
   <button (click)="limpar()">Limpar</button>
+
+  <button (click)="novoLivro()">Novo Livro</button>
+
+  <tr *ngFor="let livro of livros">
+    <td>{{ livro.titulo }}</td>
+    <td>{{ livro.autor }}</td>
+    <td>{{ getCategoriaNome(livro.categoriaId) }}</td>
+    <td>{{ livro.status }}</td>
+
+    <td>
+      <button (click)="deletar(livro)" [disabled]="livro.status === 'EMPRESTADO'">
+        Excluir
+      </button>
+    </td>
+  </tr>
 
 </div>
 
@@ -37,6 +52,6 @@
     <td>{{ livro.titulo }}</td>
     <td>{{ livro.autor }}</td>
     <td>{{ livro.status }}</td>
-    <td>{{ livro.categoria.nome }}</td>
+    <td>{{ getCategoriaNome(livro.categoriaId) }}</td>
   </tr>
 </table>

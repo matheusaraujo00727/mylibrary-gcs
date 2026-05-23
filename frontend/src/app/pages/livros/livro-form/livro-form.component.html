@@ -2,21 +2,26 @@
 
 <form [formGroup]="form" (ngSubmit)="salvar()">
 
-  <input placeholder="Título" formControlName="titulo">
+  <input placeholder="Título" formControlName="titulo" />
+  <br />
 
-  <input placeholder="Autor" formControlName="autor">
+  <input placeholder="Autor" formControlName="autor" />
+  <br />
 
-  <input placeholder="ISBN" formControlName="isbn">
+  <input placeholder="ISBN" formControlName="isbn" />
+  <br />
 
-  <input placeholder="Ano" formControlName="ano">
-
-  <input placeholder="Categoria ID" formControlName="categoriaId">
+  <input placeholder="Ano" type="number" formControlName="ano" />
+  <br />
 
   <select formControlName="categoriaId">
+    <option value="">Selecione categoria</option>
     <option *ngFor="let c of categorias" [value]="c.id">
       {{ c.nome }}
     </option>
   </select>
+
+  <br /><br />
 
   <button type="submit">Salvar</button>
 
