@@ -1,5 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Livro } from '../models/livro';
 
 @Injectable({
@@ -7,25 +7,17 @@ import { Livro } from '../models/livro';
 })
 export class LivroService {
 
-  private api = '/api/livros';
+  private api = 'http://localhost:8080/livros';
 
   constructor(private http: HttpClient) {}
 
-listar(filtros: any) {
-  let params: any = {};
-
-  if (filtros.categoriaId) {
-    params.categoriaId = filtros.categoriaId;
+  listar(filtros: any) {
+    return this.http.get<Livro[]>('http://localhost:8080/livros', {
+      params: filtros
+    });
   }
 
-  if (filtros.status) {
-    params.status = filtros.status;
+  salvar(livro: any) {
+    return this.http.post(this.api, livro);
   }
-
-  if (filtros.busca) {
-    params.busca = filtros.busca;
-  }
-
-  return this.http.get(this.api, { params });
-}
 }

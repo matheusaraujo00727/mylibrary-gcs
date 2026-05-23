@@ -1,0 +1,23 @@
+<h2>Novo Livro</h2>
+
+<form [formGroup]="form" (ngSubmit)="salvar()">
+
+  <input placeholder="Título" formControlName="titulo">
+
+  <input placeholder="Autor" formControlName="autor">
+
+  <input placeholder="ISBN" formControlName="isbn">
+
+  <input placeholder="Ano" formControlName="ano">
+
+  <input placeholder="Categoria ID" formControlName="categoriaId">
+
+  <select formControlName="categoriaId">
+    <option *ngFor="let c of categorias" [value]="c.id">
+      {{ c.nome }}
+    </option>
+  </select>
+
+  <button type="submit">Salvar</button>
+
+</form>
