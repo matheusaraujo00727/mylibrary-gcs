@@ -1,0 +1,42 @@
+<div style="margin-bottom: 20px;">
+
+  <input
+    placeholder="Buscar por título ou autor"
+    [(ngModel)]="filtros.busca"
+  />
+
+  <select [(ngModel)]="filtros.status">
+    <option value="">Todos status</option>
+    <option value="DISPONIVEL">Disponível</option>
+    <option value="EMPRESTADO">Emprestado</option>
+  </select>
+
+  <select [(ngModel)]="filtros.categoriaId">
+    <option value="">Todas categorias</option>
+    <option *ngFor="let cat of categorias" [value]="cat.id">
+      {{ cat.nome }}
+    </option>
+  </select>
+
+  <button (click)="aplicarFiltro()">Filtrar</button>
+  <button (click)="limpar()">Limpar</button>
+
+</div>
+
+<hr />
+
+<table border="1" width="100%">
+  <tr>
+    <th>Título</th>
+    <th>Autor</th>
+    <th>Status</th>
+    <th>Categoria</th>
+  </tr>
+
+  <tr *ngFor="let livro of livros">
+    <td>{{ livro.titulo }}</td>
+    <td>{{ livro.autor }}</td>
+    <td>{{ livro.status }}</td>
+    <td>{{ livro.categoria.nome }}</td>
+  </tr>
+</table>
